@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #faa2ad;
+        }
+        .jumbotron {
+            background-color: #f07ce0;
+            color: #fff;
+            padding: 2rem;
+            border-radius: 0;
+            margin-top: 5rem;
+        }
+        .lead {
+            font-size: 1.5rem;
+        }
+        .countdown-text {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <div class="jumbotron">
+            <h1 class="display-4">Please Wait!</h1>
+            <p class="lead" id="countdown">Calculating...</p>
+            <p class="countdown-text">We meet will begin shortly.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const birthdayDate = new Date('2024-07-01T00:00:00');
+            const birthdayRedirectPage = "page1.html";
+
+            function updateCountdown() {
+                const now = new Date();
+                const diff = birthdayDate - now;
+                
+                if (diff <= 0) {
+                    window.location.href = birthdayRedirectPage;
+                } else {
+                    const hours = Math.floor(diff / (1000 * 60 * 60));
+                    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                    document.getElementById("countdown").innerText = 
+                        `View after ${hours} hours, ${minutes} minutes, and ${seconds} seconds.`;
+
+                    setTimeout(updateCountdown, 1000);
+                }
+            }
+
+            updateCountdown();
+        });
+    </script>
+</body>
+</html>
